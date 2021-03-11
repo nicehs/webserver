@@ -1,0 +1,49 @@
+### **Cài đặt Blesta**
+[Cấu hình apache](https://github.com/nicehs/webserver/blob/main/apache/apache-with-php.md)  
+  
+Kiểm tra phiên bản apache và php
+```
+apache -v
+php -v
+```
+Kiểm tra requirement cho blesta [xem chi tiết](https://docs.blesta.com/display/user/Requirements)  
+Tiếp theo, nâng cấp php lên 7.x [xem chi tiết](https://www.cyberciti.biz/faq/how-to-install-php-7-2-on-centos-7-rhel-7/)  
+Download ionCube
+```
+wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
+tar -xvzf ioncube_loaders_lin_x86-64.tar.gz
+```
+Tìm folder nơi chứa extension
+```
+php -i | grep extension_dir
+```
+Copy ioncube.so vào thư mục chứa extension
+```
+cd ioncube
+cp ioncube_loader_lin_7.2.so /usr/lib64/php/modules
+```
+**Lưu ý: Phiên bản ioncube .so phải trùng với phiên bản của php**  
+Cấu hình thêm các dòng sau vào file /etc/php.ini
+```
+zend_extension = /usr/lib64/php/modules/ioncube_loader_lin_7.2.so
+extension=pdo.so
+extension=pdo_mysql.so
+```
+**Lưu ý: Trước tiên cần cài đặt php-pdo và php-mysql**  
+Kiểm tra lại
+```
+php -v
+```
+![](image-km2wu9cs.png)
+
+[Cài đặt mariadb](https://github.com/nicehs/webserver/blob/main/database-mariadb.md)
+
+Download bộ source code của blesta
+```
+wget https://account.blesta.com/client/plugin/download_manager/client_main/download/177/blesta-5.0.3.zip
+```
+Đổi quyền thư mục root sang cho apache
+```
+chown -R apache:apache /home/blesta.linex.vn
+```
+Sử dụng trình duyệt và nhập địa chỉ vhost để sử dụng

@@ -383,7 +383,7 @@ for docroot in "${docroots[@]}"; do
 done
 echo "}" >> $conf_file
 
-/usr/sbin/nginx -q -t && systemctl reload nginx.servic
+/usr/sbin/nginx -q -t && systemctl reload nginx.service
 ```
 - Nếu php_allowed khác 1 thì sẽ không cho truy cập vào file và return 403
 

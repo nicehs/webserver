@@ -151,6 +151,26 @@ location /{
 <img src="https://i.imgur.com/uIxk9uF.png">
 
 <a name="createdatabase"></a>
+
+- Config /etc/my.cnf.d/
+```
+[mysqld]
+skip-character-set-client-handshake
+character-set-server = utf8
+collation-server = utf8_unicode_ci
+
+log-error = /var/log/mysql/error.log
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 5
+max_connections = 100
+wait_timeout = 90
+interactive_timeout = 90
+
+innodb_file_format=Barracuda
+innodb_file_per_table=ON
+```
+
 ### 1. Tạo DataBase
 
 - Truy cập vào database với quyền root, với password vừa tạo ở bước trên 
@@ -158,7 +178,6 @@ location /{
 `mariadb -u root -p`
 
 - Tạo database và user:
-
 ```
 # Tạo database
 create database wordpress;
